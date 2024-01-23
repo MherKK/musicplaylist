@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const MusicUploadForm = ({musicList,setMusicList}) => {
 
+    
     let musicObj = {
         artistName:'',
         songName:'',
@@ -11,11 +12,16 @@ const MusicUploadForm = ({musicList,setMusicList}) => {
         src:'',
         isFavorite:false
     }
+    // putting the uploaded file in the uploadedMusic variable
     const [uploadedMusic,setUploadedMusic] = useState('');
+    // turning on and off the view of the upload form
     const [uploadDisplay,setUploadDisplay] = useState(false);
+    // collecting the input data and inserting it in the musicData object
     const [musicData,setMusicData] = useState(musicObj);
+    // using this state to show the upload progress
     const [progress,setProgress] = useState({started:false,pc:0});
 
+    //form handling function where we use FormData and axios for sending the data to the specified url
     function uploadFormHandler(e) {
         e.preventDefault();
         setMusicList([...musicList,{...musicData,trackNumber:musicList.length + 1}])

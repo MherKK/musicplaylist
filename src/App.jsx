@@ -4,11 +4,16 @@ import SongList from "./components/SongList"
 import musicListArray from "./music_list/musicList";
 import MyPlaylist from "./components/MyPlaylist";
 import MusicUploadForm from "./components/MusicUploadForm";
+
 export const AudioContext =createContext();
 
 function App() {
+
+ //creating state to put the audio source and use it in the Audio component
  const [audio,setAudio] = useState('');
+ //this state handles the music list that is imported from music_list folder
  const [musicList,setMusicList] = useState(musicListArray);
+ //making a state to swtich between the general playlist and user's playlist
  const [playList,setPlayList] = useState('generalPlaylist');
   return (
     <>  

@@ -3,7 +3,11 @@
 import React from 'react'
 import SongRow from './SongRow'
 
+
+//this component only shows the list of songs that the user has chose as its favorite list
 const MyPlaylist = ({musicList}) => {
+
+  //making a new array that only has the list of songs that are marked as favorite
   let myMusicList = musicList.filter((song) => song.isFavorite === true);
   return (
     <section className="mt-10">

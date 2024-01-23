@@ -3,7 +3,10 @@ import Audio from "./Audio"
 import SongRow from "./SongRow"
 import { AudioContext } from "../App"
 
+// creating the song list with the table header and the table rows that has all the audio details in it
 const SongList =  ({musicList}) => {
+
+  //passing audio source to Audio component
   const [audio,setAudio] = useContext(AudioContext)
 
   return (

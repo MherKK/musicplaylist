@@ -2,7 +2,11 @@ import { useContext } from "react"
 import { heart, play, redHeart, share, tick } from "../image_list/images"
 import { AudioContext } from "../App";
 
+
+//this component shows each song details individually 
 const SongRow = ({song}) => {
+
+    //getting data from the main component through usecontext
     const [audio,setAudio,musicList,setMusicList] = useContext(AudioContext)
   return (
     <tr className="border-b h-10 text-center">
