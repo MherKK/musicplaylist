@@ -2,10 +2,11 @@
 
 import React from 'react'
 import SongRow from './SongRow'
+import Audio from './Audio';
 
 
 //this component only shows the list of songs that the user has chose as its favorite list
-const MyPlaylist = ({musicList}) => {
+const MyPlaylist = ({musicList,audio}) => {
 
   //making a new array that only has the list of songs that are marked as favorite
   let myMusicList = musicList.filter((song) => song.isFavorite === true);
@@ -25,6 +26,7 @@ const MyPlaylist = ({musicList}) => {
         {myMusicList.map((song) => <SongRow key={song.trackNumber} song={song}/>)} 
       </tbody>
     </table> 
+    {audio !== '' && <Audio audio={audio}/>}
   </section>
 
   )

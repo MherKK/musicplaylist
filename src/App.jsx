@@ -28,11 +28,11 @@ function App() {
       </div>
       <div className="p-4">
         <AudioContext.Provider value={[audio,setAudio,musicList,setMusicList]}>
-        { playList === 'generalPlaylist' ? <SongList musicList={musicList}/> 
-          : <MyPlaylist musicList={musicList} />
+        { playList === 'generalPlaylist' ? <SongList setMusicList={setMusicList} musicList={musicList}/> 
+          : <MyPlaylist audio={audio} musicList={musicList} />
         }
         </AudioContext.Provider>
-        <MusicUploadForm musicList={musicList} setMusicList={setMusicList}/>  
+         
       </div>
       </>
   )

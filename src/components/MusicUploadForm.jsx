@@ -21,6 +21,9 @@ const MusicUploadForm = ({musicList,setMusicList}) => {
     // using this state to show the upload progress
     const [progress,setProgress] = useState({started:false,pc:0});
 
+    //using state to handle file type error message
+    const [wrongFileType,setWrongFileType] = useState('');
+
     //form handling function where we use FormData and axios for sending the data to the specified url
     function uploadFormHandler(e) {
         e.preventDefault();
@@ -29,6 +32,9 @@ const MusicUploadForm = ({musicList,setMusicList}) => {
         audioForm.append('audio',uploadedMusic)
         setProgress(prevState => {
             return {...prevState,started:true}
+        })
+        axios.get('https://httpbin.org/post').then(res => {
+            console.log(res.data);
         })
         axios.post('https://httpbin.org/post',audioForm, {
             onUploadProgress: (uploadProgress) => {
@@ -39,9 +45,10 @@ const MusicUploadForm = ({musicList,setMusicList}) => {
         }).then(res => {
             console.log(res);
             setProgress({started:false,pc:0})
+        }).catch((err) => {
+            console.log(err);
         })
     }
-    
   return (
     <div>
         <div className='flex gap-2 font-mono items-center'>
@@ -68,11 +75,18 @@ const MusicUploadForm = ({musicList,setMusicList}) => {
             <label>Upload Music:
                 <br />
                 <input required className='mt-2 mb-4' onChange={(e) => {
-                setUploadedMusic(e.target.files[0])
-                }}  type='file' accept='audio/mp3,audio/wav'/>
+                    if(e.target.files[0].type.includes('audio')){
+                        setUploadedMusic(e.target.files[0])
+                        setWrongFileType('')
+                    }else{
+                        e.target.value = ''
+                        setWrongFileType('error')
+                    }
+                }}  type='file' accept='.mp3,audio/wav'/>
             </label>
         </div>
         {progress.started && <progress max='100' value={progress.pc}></progress>}
+        {wrongFileType === 'error' && <p className=' text-red-700 text-[12px]'>Accepts only mp3 and wav audio types</p>}
         <br />
         <button className='border-2 w-[200px] hover:bg-gray-300 hover:text-white hover:font-extrabold px-4 rounded'>Upload</button>
     </form>}

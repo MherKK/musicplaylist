@@ -2,9 +2,10 @@ import { useContext } from "react"
 import Audio from "./Audio"
 import SongRow from "./SongRow"
 import { AudioContext } from "../App"
+import MusicUploadForm from "./MusicUploadForm"
 
 // creating the song list with the table header and the table rows that has all the audio details in it
-const SongList =  ({musicList}) => {
+const SongList =  ({musicList,setMusicList}) => {
 
   //passing audio source to Audio component
   const [audio,setAudio] = useContext(AudioContext)
@@ -27,6 +28,7 @@ const SongList =  ({musicList}) => {
         </tbody> 
       </table> 
       {audio !== '' && <Audio audio={audio}/>}
+      <MusicUploadForm musicList={musicList} setMusicList={setMusicList}/> 
     </section>
   ) 
 }
